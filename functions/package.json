@@ -1,0 +1,22 @@
+{
+  "name": "xebia-home",
+  "version": "1.0.0",
+  "description": "Xebia Home Assistant",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [
+    "Google",
+    "Home",
+    "Functions",
+    "Firebase",
+    "Assistant"
+  ],
+  "author": "Xebia",
+  "license": "ISC",
+  "dependencies": {
+    "actions-on-google": "1.4.0",
+    "firebase-admin": "5.4.1",
+    "firebase-functions": "0.7.0"
+  }
+}
