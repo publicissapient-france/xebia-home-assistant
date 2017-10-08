@@ -8,21 +8,22 @@
 
 ## Can tell:
 
-- [ ] où sont les toilettes ?
-- [ ] où puis-je trouver de l'eau ?
-- [ ] qu'y a-t-il au menu pour le déjeuner ?
-- [ ] quel est le métro le plus proche ?
-- [ ] qui est le prochain speaker ?
-- [ ] quel est le prochain sujet ?
-- [ ] quelles sont les entreprises présentes ?
-- [ ] comment puis-je contacter Xebia ?
-- [ ] que fait Xebia ?
-- [ ] à quelle heure reprend-on demain ? 
-- [ ] à quelle heure l'événement se termine ?
-- [ ] à quelle heure aura lieu la prochaine pause ?
-- [ ] peux-tu m'inscrire à l'atelier X ?
-- [ ] dans quelle salle la conférence X se déroule-t-elle ?
-- [ ] peux-tu m'afficher le programme de la journée ?
-- [ ] peux-tu m'afficher le plan de la salle ?
-- [ ] peux-tu m'afficher le plan du quartier ?
-- [ ] peux-tu m'afficher le résumé du talk X ?
+- [x] Où sont les toilettes ?
+- [x] Où puis-je trouver de l'eau ?
+- [ ] Qu'y a-t-il au menu pour le déjeuner ?
+- [x] Quel est le métro le plus proche ?
+- [ ] Qui est le prochain speaker ?
+- [ ] Quel est le prochain sujet ?
+- [ ] Quelles sont les entreprises présentes ?
+- [x] Comment puis-je contacter Xebia ?
+- [x] Que fait Xebia ?
+- [ ] À quelle heure reprend-on demain ? 
+- [ ] À quelle heure l'événement se termine ?
+- [ ] À quelle heure aura lieu la prochaine pause ?
+- [ ] Peux-tu m'inscrire à l'atelier X ?
+- [ ] Dans quelle salle la conférence X se déroule-t-elle ?
+- [ ] Peux-tu m'afficher le programme de la journée ?
+- [ ] Peux-tu m'afficher le plan de la salle ?
+- [ ] Peux-tu m'afficher le plan du quartier ?
+- [ ] Peux-tu m'afficher le résumé du talk X ?
+- [x] Comment roule la ligne **9** ?
