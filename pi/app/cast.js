@@ -21,7 +21,7 @@ class DisplayService {
         .on('online', function (device) {
           //console.log('New device', util.inspect(d));
           if (device.friendlyName == 'Salon Xebia') {
-            launchMediaReceiver(device, resolve, reject)
+            this.launchMediaReceiver(device, resolve, reject)
           }
         })
         .start();
