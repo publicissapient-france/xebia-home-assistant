@@ -12,8 +12,6 @@ describe('Display', () => {
 
       service.connect()
         .then(() => service.displayImage(media))
-        .then(() => service.displayImage(media))
-        .then(() => service.disconnect())
         .then(() => done())
         .catch(done);
     });

@@ -16,12 +16,12 @@ class DisplayService {
   }
 
   connect() {
+    const display = this;
     return new Promise((resolve, reject) => {
       nodecastor.scan()
         .on('online', function (device) {
-          //console.log('New device', util.inspect(d));
-          if (device.friendlyName == 'Salon Xebia') {
-            this.launchMediaReceiver(device, resolve, reject)
+          if (device.friendlyName == process.argv[0]) {
+            display.launchMediaReceiver(device, resolve, reject)
           }
         })
         .start();
