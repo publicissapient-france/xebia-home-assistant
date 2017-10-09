@@ -3,7 +3,7 @@ const DefaultMediaReceiver = require('castv2-client').DefaultMediaReceiver;
 const Promise = require('bluebird');
 const nodecastor = require('nodecastor');
 
-const logger = require('../logger');
+const logger = require('./logger');
 
 class DisplayService {
   constructor() {
@@ -17,7 +17,6 @@ class DisplayService {
 
   connect() {
     return new Promise((resolve, reject) => {
-      this.browser = mdns.createBrowser(mdns.tcp('googlecast'));
       nodecastor.scan()
         .on('online', function (device) {
           //console.log('New device', util.inspect(d));
