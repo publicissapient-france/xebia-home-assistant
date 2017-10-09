@@ -20,7 +20,7 @@ class DisplayService {
     return new Promise((resolve, reject) => {
       nodecastor.scan()
         .on('online', function (device) {
-          if (device.friendlyName == process.argv[0]) {
+          if (device.friendlyName == process.argv[2]) {
             display.launchMediaReceiver(device, resolve, reject)
           }
         })
@@ -65,10 +65,10 @@ class DisplayService {
     });
   }
 
-  displayImage(contentId) {
+  playContent(contentId, contentType) {
     const media = {
       contentId,
-      contentType: 'image/png'
+      contentType: contentType
     };
     logger.info(`app ${this.player.session.displayName} launched, loading media ${contentId}...`);
     return new Promise((resolve, reject) => {
