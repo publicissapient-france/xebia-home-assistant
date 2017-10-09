@@ -1,11 +1,11 @@
 const Client = require('castv2-client').Client;
 const DefaultMediaReceiver = require('castv2-client').DefaultMediaReceiver;
-const mdns = require('mdns');
 const Promise = require('bluebird');
+const nodecastor = require('nodecastor');
 
 const logger = require('../logger');
 
-class TalkService {
+class DisplayService {
   constructor() {
     this.player = null;
     this.client = null;
@@ -18,22 +18,22 @@ class TalkService {
   connect() {
     return new Promise((resolve, reject) => {
       this.browser = mdns.createBrowser(mdns.tcp('googlecast'));
-      this.browser.on('serviceUp', (service) => {
-        logger.info(`found device ${service.name} at ${service.addresses[0]}:${service.port}`);
-        this.launchMediaReceiver(service, resolve, reject);
-      });
-      this.browser.on('serviceDown', (service) => {
-        logger.info(`service down ${service}`);
-      });
-      this.browser.start();
+      nodecastor.scan()
+        .on('online', function (device) {
+          //console.log('New device', util.inspect(d));
+          if (device.friendlyName == 'Salon Xebia') {
+            launchMediaReceiver(device, resolve, reject)
+          }
+        })
+        .start();
     });
   }
 
-  launchMediaReceiver(service, resolve, reject) {
+  launchMediaReceiver(device, resolve, reject) {
     this.client = new Client();
 
-    this.client.connect(service.addresses[0], () => {
-      logger.info(`connected to ${service.name}, launching app`);
+    this.client.connect(device.address, () => {
+      logger.info(`connected to ${device.friendlyName}, launching app`);
 
       this.client.launch(DefaultMediaReceiver, (err, player) => {
         if (err) {
@@ -66,11 +66,10 @@ class TalkService {
     });
   }
 
-  talk(contentId) {
+  displayImage(contentId) {
     const media = {
       contentId,
-      contentType: 'audio/mp3',
-      streamType: 'BUFFERED',
+      contentType: 'image/png'
     };
     logger.info(`app ${this.player.session.displayName} launched, loading media ${contentId}...`);
     return new Promise((resolve, reject) => {
@@ -97,4 +96,4 @@ class TalkService {
   }
 }
 
-module.exports = TalkService;
+module.exports = DisplayService;
