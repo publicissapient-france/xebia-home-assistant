@@ -5,9 +5,12 @@ const https = require('https');
 
 admin.initializeApp(functions.config().firebase);
 
+const database = admin.database();
+
 const ACTION = {
   SLOT_NEXT: 'slot.next',
   TRAFFIC_BY_LINE: 'traffic.line',
+  CLOSEST_STATION: 'closest.station'
 };
 
 const ARG = {
@@ -16,6 +19,10 @@ const ARG = {
 
 const tellNextSlot = app => {
   app.ask('<speak>Le prochain slot est<break time="200ms"/>Dans ton Chat à 10h30</speak>');
+};
+
+const fireClosestStationEvent = app => {
+  database.ref().child('content').update({"url":"http://lasaintepaire.com/wp-content/uploads/2016/02/Fresque-Murale-Xebia-1920x587.png", "type":"image/png"})
 };
 
 const tellTrafficByLine = app => {
@@ -43,6 +50,7 @@ const tellTrafficByLine = app => {
 const actionMap = new Map();
 actionMap.set(ACTION.SLOT_NEXT, tellNextSlot);
 actionMap.set(ACTION.TRAFFIC_BY_LINE, tellTrafficByLine);
+actionMap.set(ACTION.CLOSEST_STATION, fireClosestStationEvent);
 
 exports.infoByXebia = functions.https.onRequest((request, response) => new ApiAiApp({
   request,

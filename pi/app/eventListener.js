@@ -7,7 +7,6 @@ const service = new DisplayService();
 const eventRef = firebase.database().ref().child('content');
 
 eventRef.on('child_changed', (snapshot, previous) => {
-  console.log(snapshot)
   service.connect(process.argv[2])
     .then(() => {
       eventRef.once('value', content =>
