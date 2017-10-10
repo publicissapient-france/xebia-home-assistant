@@ -91,7 +91,6 @@ class DisplayService {
   disconnect() {
     logger.info('disconnecting');
     this.client.close();
-    this.browser.stop();
   }
 }
 
