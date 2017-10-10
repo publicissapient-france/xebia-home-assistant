@@ -1,5 +1,6 @@
 const firebase = require('./firebase').getFirebaseClient();
 const DisplayService = require('./cast');
+const logger = require('./logger');
 
 const service = new DisplayService();
 
@@ -18,6 +19,7 @@ eventRef.on('child_changed', (snapshot, previous) => {
 const disconnectService = () => {
   logger.debug(`Disconnecting Cast`)
   service.disconnect()
+  process.exit()
 }
 
 process.on('SIGTERM', disconnectService);

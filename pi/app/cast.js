@@ -90,7 +90,9 @@ class DisplayService {
 
   disconnect() {
     logger.info('disconnecting');
-    this.client.close();
+    if (this.client) {
+      this.client.close();
+    }
   }
 }
 
