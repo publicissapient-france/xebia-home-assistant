@@ -15,12 +15,12 @@ class DisplayService {
     this.reject = null;
   }
 
-  connect() {
+  connect(castTarget) {
     const display = this;
     return new Promise((resolve, reject) => {
       nodecastor.scan()
         .on('online', function (device) {
-          if (device.friendlyName == process.argv[2]) {
+          if (device.friendlyName == castTarget) {
             display.launchMediaReceiver(device, resolve, reject)
           }
         })
