@@ -3,6 +3,7 @@ const admin = require('firebase-admin');
 const {ApiAiApp} = require('actions-on-google');
 const https = require('https');
 const {getWhatForLunch} = require('./lunch');
+const {getAgenda} = require('./agenda');
 
 admin.initializeApp(functions.config().firebase);
 
@@ -15,6 +16,7 @@ const ACTION = {
   LUNCH: 'lunch',
   CONTACT_XEBIA: 'contact.xebia',
   MAP_LOCAL: 'map.local',
+  AGENDA: 'agenda',
 };
 
 const ARG = {
@@ -28,10 +30,7 @@ const tellNextSlot = app => {
 const tellClosestStation = app => {
   app.ask(`La station Miromesnil est à 5 minutes`);
   // noinspection JSIgnoredPromiseFromCall
-  database.ref().child('content').update({
-    url: 'https://i.imgur.com/OEHXFO3.png',
-    type: 'image/png',
-  })
+  cast('https://i.imgur.com/OEHXFO3.png', 'image/png');
 };
 
 const tellTrafficByLine = app => {
@@ -66,26 +65,32 @@ const tellWhatForLunch = app => {
       app.ask('Et voilà le menu');
     }
     // noinspection JSIgnoredPromiseFromCall
-    database.ref().child('content').update({
-      url: 'https://i.imgur.com/txDXnub.png',
-      type: 'image/png'
-    });
+    cast('https://i.imgur.com/txDXnub.png', 'image/png'); // 'cause it's same image every day
   });
 };
 
 const tellHowToContactXebia = app => {
   app.ask('Passez nous voir au 3ème étage ou appelez-nous');
-  database.ref().child('content').update({
-    url: 'https://i.imgur.com/hLtorIG.png',
-    type: 'image/png'
-  });
+  cast('https://i.imgur.com/hLtorIG.png', 'image/png');
 };
 
 const tellLocalMap = app => {
-  app.ask('Oui, voici le plan');
-  database.ref().child('content').update({
-    url: 'https://i.imgur.com/jenxLHI.png',
-    type: 'image/png'
+  app.ask('Voici le plan');
+  cast('https://i.imgur.com/jenxLHI.png', 'image/png');
+};
+
+const cast = (url, type) => database.ref().child('content').update({url, type});
+
+const tellAgenda = app => {
+  database.ref().child('conference').once('value').then(res => {
+    const agenda = getAgenda(res.val());
+    if (agenda) {
+      app.ask('Voilà le planning de la journée');
+      // noinspection JSUnresolvedVariable
+      cast(agenda, 'image/png');
+    } else {
+      app.ask('Désolé, je n\'ai pas trouvé le planning d\'aujourd\'hui')
+    }
   });
 };
 
@@ -96,6 +101,7 @@ actionMap.set(ACTION.CLOSEST_STATION, tellClosestStation);
 actionMap.set(ACTION.LUNCH, tellWhatForLunch);
 actionMap.set(ACTION.CONTACT_XEBIA, tellHowToContactXebia);
 actionMap.set(ACTION.MAP_LOCAL, tellLocalMap);
+actionMap.set(ACTION.AGENDA, tellAgenda);
 
 exports.infoByXebia = functions.https.onRequest((request, response) => new ApiAiApp({
   request,
