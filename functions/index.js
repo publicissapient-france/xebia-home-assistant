@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const {ApiAiApp} = require('actions-on-google');
 const https = require('https');
+const {getWhatForLunch} = require('./lunch');
 
 admin.initializeApp(functions.config().firebase);
 
@@ -10,7 +11,8 @@ const database = admin.database();
 const ACTION = {
   SLOT_NEXT: 'slot.next',
   TRAFFIC_BY_LINE: 'traffic.line',
-  CLOSEST_STATION: 'closest.station'
+  CLOSEST_STATION: 'closest.station',
+  LUNCH: 'lunch',
 };
 
 const ARG = {
@@ -22,7 +24,10 @@ const tellNextSlot = app => {
 };
 
 const fireClosestStationEvent = app => {
-  database.ref().child('content').update({"url":"http://lasaintepaire.com/wp-content/uploads/2016/02/Fresque-Murale-Xebia-1920x587.png", "type":"image/png"})
+  database.ref().child('content').update({
+    "url": "http://lasaintepaire.com/wp-content/uploads/2016/02/Fresque-Murale-Xebia-1920x587.png",
+    "type": "image/png"
+  })
 };
 
 const tellTrafficByLine = app => {
@@ -47,10 +52,22 @@ const tellTrafficByLine = app => {
   });
 };
 
+const tellWhatForLunch = app => {
+  database.ref().child('lunch').once('value').then(res => {
+    const forLunch = getWhatForLunch(res.val());
+    if (forLunch) {
+      app.ask(forLunch);
+    } else {
+      app.ask('Désolé, je \'ai pas trouvé de menu pour aujourd\'hui');
+    }
+  });
+};
+
 const actionMap = new Map();
 actionMap.set(ACTION.SLOT_NEXT, tellNextSlot);
 actionMap.set(ACTION.TRAFFIC_BY_LINE, tellTrafficByLine);
 actionMap.set(ACTION.CLOSEST_STATION, fireClosestStationEvent);
+actionMap.set(ACTION.LUNCH, tellWhatForLunch);
 
 exports.infoByXebia = functions.https.onRequest((request, response) => new ApiAiApp({
   request,

@@ -10,7 +10,7 @@
 
 - [x] Où sont les toilettes ?
 - [x] Où puis-je trouver de l'eau ?
-- [ ] Qu'y a-t-il au menu pour le déjeuner (*visuel*) ?
+- [x] Qu'y a-t-il au menu pour le déjeuner (*visuel*) ?
 - [x] Quel est le métro le plus proche (*visuel*) ?
 - [ ] Qui est le prochain speaker ?
 - [ ] Quel est le prochain sujet ?
