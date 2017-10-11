@@ -12,13 +12,13 @@
 - [x] Où puis-je trouver de l'eau ?
 - [x] Qu'y a-t-il au menu pour le déjeuner (*visuel*) ?
 - [x] Quel est le métro le plus proche (*visuel*) ?
-- [ ] Quel est le prochain sujet ?
 - [ ] Quelles sont les entreprises présentes (*visuel*) ?
 - [x] Comment puis-je contacter Xebia (*visuel*) ?
 - [x] Que fait Xebia ?
 - [ ] À quelle heure reprend-on demain ? 
 - [ ] À quelle heure l'événement se termine ?
+- [ ] Quel est le prochain sujet ?
 - [ ] À quelle heure aura lieu la prochaine pause ?
 - [ ] Peux-tu m'afficher le programme de la journée (*visuel*) ?
-- [ ] Peux-tu m'afficher le plan du quartier (*visuel*) ?
+- [x] Peux-tu m'afficher le plan du quartier (*visuel*) ?
 - [x] Comment roule la ligne **9** ?

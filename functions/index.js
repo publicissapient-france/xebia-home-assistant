@@ -14,6 +14,7 @@ const ACTION = {
   CLOSEST_STATION: 'closest.station',
   LUNCH: 'lunch',
   CONTACT_XEBIA: 'contact.xebia',
+  MAP_LOCAL: 'map.local',
 };
 
 const ARG = {
@@ -80,12 +81,21 @@ const tellHowToContactXebia = app => {
   });
 };
 
+const tellLocalMap = app => {
+  app.ask('Oui, voici le plan');
+  database.ref().child('content').update({
+    url: 'https://i.imgur.com/jenxLHI.png',
+    type: 'image/png'
+  });
+};
+
 const actionMap = new Map();
 actionMap.set(ACTION.SLOT_NEXT, tellNextSlot);
 actionMap.set(ACTION.TRAFFIC_BY_LINE, tellTrafficByLine);
 actionMap.set(ACTION.CLOSEST_STATION, tellClosestStation);
 actionMap.set(ACTION.LUNCH, tellWhatForLunch);
 actionMap.set(ACTION.CONTACT_XEBIA, tellHowToContactXebia);
+actionMap.set(ACTION.MAP_LOCAL, tellLocalMap);
 
 exports.infoByXebia = functions.https.onRequest((request, response) => new ApiAiApp({
   request,
