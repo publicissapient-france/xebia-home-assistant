@@ -10,12 +10,12 @@
 
 - [x] Où sont les toilettes ?
 - [x] Où puis-je trouver de l'eau ?
-- [ ] Qu'y a-t-il au menu pour le déjeuner ?
-- [x] Quel est le métro le plus proche ?
+- [ ] Qu'y a-t-il au menu pour le déjeuner (*visuel*) ?
+- [x] Quel est le métro le plus proche (*visuel*) ?
 - [ ] Qui est le prochain speaker ?
 - [ ] Quel est le prochain sujet ?
-- [ ] Quelles sont les entreprises présentes ?
-- [x] Comment puis-je contacter Xebia ?
+- [ ] Quelles sont les entreprises présentes (*visuel*) ?
+- [x] Comment puis-je contacter Xebia (*visuel*) ?
 - [x] Que fait Xebia ?
 - [ ] À quelle heure reprend-on demain ? 
 - [ ] À quelle heure l'événement se termine ?
