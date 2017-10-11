@@ -13,6 +13,7 @@ const ACTION = {
   TRAFFIC_BY_LINE: 'traffic.line',
   CLOSEST_STATION: 'closest.station',
   LUNCH: 'lunch',
+  CONTACT_XEBIA: 'contact.xebia',
 };
 
 const ARG = {
@@ -71,11 +72,20 @@ const tellWhatForLunch = app => {
   });
 };
 
+const tellHowToContactXebia = app => {
+  app.ask('Passez nous voir au 3ème étage ou appelez-nous');
+  database.ref().child('content').update({
+    url: 'https://i.imgur.com/hLtorIG.png',
+    type: 'image/png'
+  });
+};
+
 const actionMap = new Map();
 actionMap.set(ACTION.SLOT_NEXT, tellNextSlot);
 actionMap.set(ACTION.TRAFFIC_BY_LINE, tellTrafficByLine);
 actionMap.set(ACTION.CLOSEST_STATION, tellClosestStation);
 actionMap.set(ACTION.LUNCH, tellWhatForLunch);
+actionMap.set(ACTION.CONTACT_XEBIA, tellHowToContactXebia);
 
 exports.infoByXebia = functions.https.onRequest((request, response) => new ApiAiApp({
   request,
