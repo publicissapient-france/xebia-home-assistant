@@ -15,9 +15,9 @@
 - [ ] Quelles sont les entreprises présentes (*visuel*) ?
 - [x] Comment puis-je contacter Xebia (*visuel*) ?
 - [x] Que fait Xebia ?
-- [ ] À quelle heure reprend-on demain ? 
-- [ ] À quelle heure l'événement se termine ?
-- [ ] Quel est le prochain sujet ?
+- [x] À quelle heure reprend-on demain ?
+- [x] À quelle heure l'événement se termine ?
+- [x] Quel est le prochain sujet ?
 - [ ] À quelle heure aura lieu la prochaine pause ?
 - [x] Peux-tu m'afficher le programme de la journée (*visuel*) ?
 - [x] Peux-tu m'afficher le plan du quartier (*visuel*) ?

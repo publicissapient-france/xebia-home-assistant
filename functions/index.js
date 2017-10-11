@@ -2,8 +2,9 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const {ApiAiApp} = require('actions-on-google');
 const https = require('https');
+const moment = require('moment');
 const {getWhatForLunch} = require('./lunch');
-const {getAgenda} = require('./agenda');
+const {getConference, getNextSlot} = require('./agenda');
 
 admin.initializeApp(functions.config().firebase);
 
@@ -24,7 +25,15 @@ const ARG = {
 };
 
 const tellNextSlot = app => {
-  app.ask('<speak>Le prochain slot est<break time="200ms"/>Dans ton Chat à 10h30</speak>');
+  database.ref().child('conference').once('value').then(res => {
+    const slot = getNextSlot(res.val());
+    if (slot) {
+      // noinspection JSUnresolvedVariable
+      app.ask(`<speak>Le prochain sujet est <break time="200ms"/>${slot.title} à ${moment(slot.date).format('HH[h]mm')}</speak>`);
+    } else {
+      app.tell('Désolé, il n\'y a plus de sujet pour aujourd\'hui, à bientôt');
+    }
+  });
 };
 
 const tellClosestStation = app => {
@@ -83,11 +92,12 @@ const cast = (url, type) => database.ref().child('content').update({url, type});
 
 const tellAgenda = app => {
   database.ref().child('conference').once('value').then(res => {
-    const agenda = getAgenda(res.val());
-    if (agenda) {
+    const conf = getConference(res.val());
+    // noinspection JSUnresolvedVariable
+    if (conf && conf.agenda) {
       app.ask('Voilà le planning de la journée');
       // noinspection JSUnresolvedVariable
-      cast(agenda, 'image/png');
+      cast(conf.agenda, 'image/png');
     } else {
       app.ask('Désolé, je n\'ai pas trouvé le planning d\'aujourd\'hui')
     }
