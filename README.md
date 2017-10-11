@@ -18,7 +18,7 @@
 - [x] À quelle heure reprend-on demain ?
 - [x] À quelle heure l'événement se termine ?
 - [x] Quel est le prochain sujet ?
-- [ ] À quelle heure aura lieu la prochaine pause ?
+- [x] À quelle heure aura lieu la prochaine pause ?
 - [x] Peux-tu m'afficher le programme de la journée (*visuel*) ?
 - [x] Peux-tu m'afficher le plan du quartier (*visuel*) ?
 - [x] Comment roule la ligne **9** ?

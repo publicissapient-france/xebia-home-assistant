@@ -30,8 +30,26 @@ const getNextSlot = conferences => {
   return slot;
 };
 
+const getNextBreak = conferences => {
+  let time = null;
+  const conf = getConference(conferences);
+  if (conf) {
+    const now = moment();
+    const sortSlot = sortByDate(conf.slot);
+    _.each(sortSlot, s => {
+      let d = moment(s.date);
+      if (d.isAfter(now) && s.type === 'break') {
+        time = d.utcOffset('+0200').format('HH[h]mm');
+        return false;
+      }
+    });
+  }
+  return time;
+};
+
 module.exports = {
   getConference,
   sortByDate,
   getNextSlot,
+  getNextBreak,
 };

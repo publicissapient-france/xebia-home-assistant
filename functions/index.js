@@ -4,7 +4,7 @@ const {ApiAiApp} = require('actions-on-google');
 const https = require('https');
 const moment = require('moment');
 const {getWhatForLunch} = require('./lunch');
-const {getConference, getNextSlot} = require('./agenda');
+const {getConference, getNextSlot, getNextBreak} = require('./agenda');
 
 admin.initializeApp(functions.config().firebase);
 
@@ -12,6 +12,7 @@ const database = admin.database();
 
 const ACTION = {
   SLOT_NEXT: 'slot.next',
+  BREAK_NEXT: 'break.next',
   TRAFFIC_BY_LINE: 'traffic.line',
   CLOSEST_STATION: 'closest.station',
   LUNCH: 'lunch',
@@ -29,7 +30,7 @@ const tellNextSlot = app => {
     const slot = getNextSlot(res.val());
     if (slot) {
       // noinspection JSUnresolvedVariable
-      app.ask(`<speak>Le prochain sujet est <break time="200ms"/>${slot.title} à ${moment(slot.date).format('HH[h]mm')}</speak>`);
+      app.ask(`<speak>Le prochain sujet est <break time="200ms"/>${slot.title} à ${moment(slot.date).utcOffset('+0200').format('HH[h]mm')}</speak>`);
     } else {
       app.tell('Désolé, il n\'y a plus de sujet pour aujourd\'hui, à bientôt');
     }
@@ -104,8 +105,20 @@ const tellAgenda = app => {
   });
 };
 
+const tellNextBreak = app => {
+  database.ref().child('conference').once('value').then(res => {
+    const time = getNextBreak(res.val());
+    if (time) {
+      app.ask(`<speak>La prochaine pause est à <break time="200ms"/>${time}</speak>`);
+    } else {
+      app.ask('<speak>Désolé, mais il n\'y a plus de pause prévue pour aujourd\'ui <break time="200ms"/> courage</speak>');
+    }
+  });
+};
+
 const actionMap = new Map();
 actionMap.set(ACTION.SLOT_NEXT, tellNextSlot);
+actionMap.set(ACTION.BREAK_NEXT, tellNextBreak);
 actionMap.set(ACTION.TRAFFIC_BY_LINE, tellTrafficByLine);
 actionMap.set(ACTION.CLOSEST_STATION, tellClosestStation);
 actionMap.set(ACTION.LUNCH, tellWhatForLunch);
