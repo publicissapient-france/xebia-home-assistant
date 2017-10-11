@@ -4,7 +4,7 @@
 
 - [Actions on Google](https://console.actions.google.com)
 - [Firebase Functions](https://console.firebase.google.com)
-- [Api.ai](https://console.dialogflow.com/api-client/)
+- [Dialogflow](https://console.dialogflow.com/api-client/)
 
 ## Can tell:
 
@@ -22,3 +22,17 @@
 - [x] Peux-tu m'afficher le programme de la journée (*visuel*) ?
 - [x] Peux-tu m'afficher le plan du quartier (*visuel*) ?
 - [x] Comment roule la ligne **9** ?
+
+## How to:
+
+### Deploy firebase functions
+
+```
+$> cd functions && npm run deploy
+```
+
+### Run tests
+
+```
+$> cd functions && npm test
+```
