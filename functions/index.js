@@ -40,7 +40,7 @@ const loop = (app, previousMessage) => {
 var timeoutForHomeScreen;
 
 const setTimeoutToDisplayHomeScreen = () => {
-  timeoutForHomeScreen = setTimeout(() => cast(homeImage, 'image/png'), 5000);
+  timeoutForHomeScreen = setTimeout(() => cast(homeImage, 'image/png'), 10000);
 };
 
 function clearTimeoutToDisplayHomeScreen() {
@@ -85,7 +85,7 @@ const tellTrafficByLine = app => {
         }
         loop(app, message)
       } catch (e) {
-        console.error(e);
+        logger.error(e);
       }
 
     })
@@ -180,7 +180,11 @@ actionMap.set(ACTION.END_CONVERSATION, endConversation);
 
 cast(homeImage, 'image/png');
 
-exports.infoByXebia = functions.https.onRequest((request, response) => new ApiAiApp({
-  request,
-  response,
-}).handleRequest(actionMap));
+exports.infoByXebia = functions.https.onRequest((request, response) => {
+  clearTimeoutToDisplayHomeScreen();
+  setTimeoutToDisplayHomeScreen();
+  new ApiAiApp({
+    request,
+    response,
+  }).handleRequest(actionMap)
+});
