@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Xebia Home Assistant",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "mocha test",
+    "deploy": "firebase deploy"
+  },
   "keywords": [
     "Google",
     "Home",
@@ -26,6 +29,7 @@
     "eslint": "4.8.0",
     "eslint-config-airbnb-base": "12.0.2",
     "eslint-plugin-import": "2.7.0",
+    "firebase-tools": "3.13.1",
     "mocha": "4.0.1"
   }
 }
