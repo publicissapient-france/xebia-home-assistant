@@ -3,7 +3,7 @@
 ## Use:
 
 - [Actions on Google](https://console.actions.google.com)
-- [Firebase Functions](https://console.firebase.google.com)
+- [Firebase](https://console.firebase.google.com) (Functions and Database)
 - [Dialogflow](https://console.dialogflow.com/api-client/)
 
 ## Can tell:
